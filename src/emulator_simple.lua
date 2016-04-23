@@ -91,8 +91,8 @@ programMemory = {}
 
 -- TODO: Ram emulation
 
--- Load OS or whatever.
-loadProgram(programMemory, "os.dat", labels)
+-- Load program or whatever.
+loadProgram(programMemory, "../demos/os.dat", labels)
 
 
 while true do
