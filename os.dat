@@ -1,0 +1,13 @@
+load r3 0
+load r4 1
+load r2 10
+print r4
+print r3
+label start
+add r3 r4
+print r3
+jg r3 r2 end
+goto start
+label end
+printstr Finished
+done
