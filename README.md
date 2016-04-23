@@ -1,4 +1,4 @@
-# paladin-emulator
+# paladin
 Emulating an arbitrary custom-designed imaginary computer system.
 
 Paladin is an arbitrary, imaginary computer system that should be reminiscent of systems long gone. See the paladin design documentation to learn more on the design of the system.
