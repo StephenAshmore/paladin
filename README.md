@@ -7,9 +7,9 @@ This repository contains the emulator for the paladin computer system ( and all 
 The Paladin-emulator uses simple interpretation to run code. In the future, this would be dynamic recompilation for speed. Paladin-emulator is currently designed for smaller programs, and as such loads an entire program into memory for execution.
 
 Dependencies:
-*Lua.
-*[Classic Lua Classes](https://github.com/rxi/classic)
-*[In the future, we will need a dependency for a graphics library]
+* Lua.
+* [Classic Lua Classes](https://github.com/rxi/classic)
+* [In the future, we will need a dependency for a graphics library]
 
 
 ### License
