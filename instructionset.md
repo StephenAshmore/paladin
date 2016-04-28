@@ -5,43 +5,42 @@ Instruction set currently contains 22 different instructions or opcodes. Working
 Until a better method of implementing registers using an actual byte method, the logic opcodes will not be implemented. Also, most opcodes here will handle large integers, because of the simplistic nature in which they are implemented. When a method to implement registers in a more realistic way is determined, these opcodes will be re-written.
 
 ## Arithmetic Opcodes
-add
+* add  
 	addition operands: [register] [register/number]
-sub
+* sub  
 	subtraction operands: [register] [register/number]
-div
+* div  
 	division operands: [register] [register/number]
-mul
+* mul  
 	multiplication operands: [register] [register/number]
 
 ## Register Management Opcodes
-mov
+* mov  
 	move a value into a register. operands: [register] [register/number]
-load
+* load  
 	load a register with a value from memory. operands: [register]
-print
+* print  
 	print contents of a register. operands: [register]
 
 ## Logic Opcodes
-and
-or
-not
-xor
+* and
+* or
+* not
+* xor
 
 ## Loop Opcodes
-loop
-decr
-incr
+* loop
+* decr
+* incr
 
 ## Branch Opcodes
-jg
-jge
-jle
-jl
-jne
-label
-goto
-
+* jg
+* jge
+* jle
+* jl
+* jne
+* label
+* goto
 
 ## String manipulation
-prts
+* prts
