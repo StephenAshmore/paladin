@@ -1,0 +1,11 @@
+mov MAX 0
+mov MBX 0
+add MAX 1
+print MAX
+prts Should have been 1
+add MBX 2
+print MBX 
+prts Should have been 2
+add MAX MBX
+print MAX
+prts Should have been 3

@@ -1,0 +1,24 @@
+prts Registers
+print MAX
+print MBX
+print MCX
+print MDX
+print MEX
+print MFX
+print MGX
+print MHX
+mul MAX 5
+add MBX 7
+mov MCX 12
+mov MDX 2
+div MCX MDX
+prts Registers
+print MAX
+print MBX
+print MCX
+print MDX
+print MEX
+print MFX
+print MGX
+print MHX
+prts Correct is: 0 7 6 0 0 0 0 0
