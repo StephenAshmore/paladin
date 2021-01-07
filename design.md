@@ -1,7 +1,7 @@
 # paladin design documentation
 
 Paladin is an 8-bit system emulator. The paladin system includes CPU, memory, hard disk, extension cards, and more.
-Design is inspired from many sources, including the Commodore 64 and Commodore 128.
+Design is inspired from many sources, including the Commodore 64 and Commodore 128. And more recently the video game Exapunks has heavily inspired some of the design. That means I am deprioritizing the 8-bit nature of the system, and focusing on the feature-set.
 
 ## Main System
 
