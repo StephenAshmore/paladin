@@ -11,7 +11,7 @@ local cpu = paladin()
 
 -- Load the program
 local prog = program()
-prog:load("../demos/test2.dat")
+prog:load("../demos/test3.dat")
 
 -- Pass the program to the emulator and go
 cpu:bootstrap(prog)

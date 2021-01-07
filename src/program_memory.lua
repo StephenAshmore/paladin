@@ -22,12 +22,13 @@ function program:load(file)
 			local tempMemory = split(line, "%S+")
 			local i = 0
 			for i = 0, tempMemory.size - 1 do
-				if tempMemory[i] == 'label' then
+				local instruction = tempMemory[i]
+				if string.lower(instruction) == 'label' then
 					self.labels[tempMemory[i+1]] = position
--- 					print("Found a label at " .. position .. " called " .. tempMemory[i+1])
+					-- print("Found a label at " .. position .. " called " .. tempMemory[i+1])
 					break
-				elseif tempMemory[i] == 'prts' then
-					self.instructions[position] = tempMemory[i]
+				elseif string.lower(instruction) == 'prts' then
+					self.instructions[position] = instruction
 					self.instructions[position+1] = ""
 					for j = 1, tempMemory.size - 1 do
 						if j == 1 then
@@ -36,12 +37,10 @@ function program:load(file)
 							self.instructions[position+1] = self.instructions[position+1] .. " " .. tempMemory[j]
 						end
 					end
-					print("Just created a string for the prts instruction: " .. self.instructions[position+1])
 					position = position + 2
 					break
 				else
--- 					print("Splitting results " .. tempMemory[i])
-					self.instructions[position] = tempMemory[i]
+					self.instructions[position] = instruction
 					position = position + 1
 				end
 			end
@@ -69,6 +68,14 @@ function program:advance(num)
 -- 		return nil
 		-- probably not needed, will rely on other method
 	end
+end
+
+function program:currentLine()
+	return self.programCounter
+end
+
+function program:jumpTo(counter)
+	self.programCounter = counter
 end
 
 function program:good()

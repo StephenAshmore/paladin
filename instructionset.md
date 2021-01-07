@@ -20,7 +20,9 @@ Until a better method of implementing registers using an actual byte method, the
 * load  
 	load a register with a value from memory. operands: [register]
 * print  
-	print contents of a register. operands: [register]
+	print contents of a register to the console. operands: [register]
+* printall
+	prints the contents of all registers as a name, value list of tuples to the console. no operands
 
 ## Logic Opcodes
 * and
@@ -34,13 +36,15 @@ Until a better method of implementing registers using an actual byte method, the
 * incr
 
 ## Branch Opcodes
-* jg
-* jge
-* jle
-* jl
-* jne
 * label
-* goto
+	name the instruction/"line" for later user. operands: [label-name]
+* jump
+	jump to a pre-defined label. operands: [label-name]
+* tjmp
+	if the test register (TCX) is true(1), jump to the specified label. operands: [label-name]
+* fjmp
+	if the test register (TCX) is false(0), jump to the specified label. operands: [label-name]
 
 ## String manipulation
 * prts
+	print an arbitrary string to the console. operands: ["string here"]

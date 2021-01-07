@@ -4,6 +4,7 @@ require "program_memory"
 paladin = Object:extend()
 
 function paladin:new()
+	self.labels = {}
 	self.memory = {}
 	self.registers = {}
 	
@@ -24,7 +25,7 @@ function paladin:bootstrap(prog)
 	self.registers["MHX"] = 0
 	
 	-- Misc Registers:
-	self.registers["LCX"] = 0 -- Loop Control Register
+	self.registers["TCX"] = 0 -- Test Control Register
 end
 
 
@@ -37,7 +38,7 @@ function paladin:go()
 	while self.program:good() do
 		advanceNum = 1 -- set to 1 in case of unrecognized instruction.
 				-- unrecognized instructions will be ignored 1 instruction at a time
-		cmd = self.program:next()
+		cmd = string.lower(self.program:next())
 				
 		if cmd == 'add' then
 			op1 = self.program:next(1)
@@ -121,6 +122,76 @@ function paladin:go()
 			op1 = self.program:next(1)
 			print( op1 )
 			advanceNum = 2
+		elseif cmd == 'printall' then
+			outString = ''
+			for name, register in pairs(self.registers) do
+				outString = outString .. '(' .. name .. ',' .. register .. ') '
+			end
+			print(outString)
+		elseif cmd == 'jump' then
+			op1 = self.program:next(1)
+			self.program:jumpTo(self.program.labels[op1])
+			advanceNum = 0
+		elseif cmd == 'tjmp' then
+			op1 = self.program:next(1)
+			if self.registers['TCX'] == 1 then
+				self.program:jumpTo(self.program.labels[op1])
+				advanceNum = 0
+			else
+				advanceNum = 2
+			end
+		elseif cmd == 'fjmp' then
+			op1 = self.program:next(1)
+			if self.registers['TCX'] == 0 then
+				self.program:jumpTo(self.program.labels[op1])
+				advanceNum = 0
+			else
+				advanceNum = 2
+			end
+		elseif cmd == 'test' then
+			op1 = self.program:next(1)
+			op2 = self.program:next(2)
+			op3 = self.program:next(3)
+			op1 = tonumber(self.registers[op1] or op1)
+			op3 = tonumber(self.registers[op3] or op3)
+			if op2 == '=' then
+				if op1 == op3 then
+					self.registers['TCX'] = 1
+				else
+					self.registers['TCX'] = 0
+				end
+			elseif op2 == '<' then
+				if op1 < op3 then
+					self.registers['TCX'] = 1
+				else
+					self.registers['TCX'] = 0
+				end
+			elseif op2 == '>' then
+				if op1 > op3 then
+					self.registers['TCX'] = 1
+				else
+					self.registers['TCX'] = 0
+				end
+			elseif op2 == '>=' then
+				if op1 >= op3 then
+					self.registers['TCX'] = 1
+				else
+					self.registers['TCX'] = 0
+				end
+			elseif op2 == '<=' then
+				if op1 <= op3 then
+					self.registers['TCX'] = 1
+				else
+					self.registers['TCX'] = 0
+				end
+			elseif op2 == '<>' then
+				if op1 ~= op3 then
+					self.registers['TCX'] = 1
+				else
+					self.registers['TCX'] = 0
+				end
+			end
+			advanceNum = 3
 		end
 			
 		self.program:advance(advanceNum)
