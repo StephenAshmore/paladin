@@ -1,0 +1,25 @@
+prts "Testing modules"
+prts "Modules installed are..."
+modules
+prts "Modules installation complete."
+prts "Testing tape disk..."
+MOV MAX 1
+MOV MBX 2
+MOV MCX 3
+MOV MDX 4
+tape input MAX
+tape input MBX
+tape input MCX
+tape input MDX
+tape input 5
+
+tape seek 0
+MOV MEX 5
+LABEL loop
+SUB MEX 1
+tape output MFX
+print MFX
+test MEX > 0
+tjmp loop
+
+prts "Testing tape disk finished."
