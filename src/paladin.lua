@@ -1,13 +1,14 @@
 require "global"
 require "program_memory"
+require "modules.tape"
 
 paladin = Object:extend()
 
 function paladin:new()
 	self.labels = {}
 	self.memory = {}
+	self.modules = {}
 	self.registers = {}
-	
 end
 
 function paladin:bootstrap(prog)
@@ -26,6 +27,15 @@ function paladin:bootstrap(prog)
 	
 	-- Misc Registers:
 	self.registers["TCX"] = 0 -- Test Control Register
+
+	-- Modules:
+	local t = tape(4)
+	print(t.name)
+	t:input(1)
+	t:seek(0)
+	print(t:output())
+	self.modules["TAPE"] = tape(500)
+	print(self.modules["TAPE"]:output())
 end
 
 
@@ -192,6 +202,34 @@ function paladin:go()
 				end
 			end
 			advanceNum = 3
+		elseif cmd == 'modules' then
+			outString = ': '
+			for name, moduleValue in pairs(self.modules) do
+				outString = outString .. name .. ' ' .. moduleValue.name .. ' '
+			end
+			print(outString)
+		elseif cmd == 'tape' then
+			local cmd2 = string.lower(self.program:next(1))
+			if cmd2 == 'input' then
+				op1 = self.program:next(2)
+				op1 = self.registers[op1] or op1
+				self.modules['TAPE']:input(op1)
+				advanceNum = 3
+			elseif cmd2 == 'output' then
+				op1 = self.program:next(2)
+				if self.registers[op1] ~= nil then
+					self.registers[op1] = self.modules['TAPE']:output()
+				end
+				advanceNum = 3
+			elseif cmd2 == 'seek' then
+				op1 = self.program:next(2)
+				op1 = self.registers[op1] or op1
+				self.modules['TAPE']:seek(tonumber(op1))
+				advanceNum = 3
+			elseif cmd2 == 'step' then
+				self.modules['TAPE']:step()
+				advanceNum = 2
+			end
 		end
 			
 		self.program:advance(advanceNum)

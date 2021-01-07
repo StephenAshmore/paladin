@@ -48,3 +48,17 @@ Until a better method of implementing registers using an actual byte method, the
 ## String manipulation
 * prts
 	print an arbitrary string to the console. operands: ["string here"]
+
+## Interacting with Modules
+* modules
+	prints the names of the modules to the console. no operands.
+* tape
+	tape is the high level operation for manipulating the tape module.
+	- input
+		`tape input` inserts the operand into the current pointer location of the tape and moves the pointer to the next entry. operands: [register/value]
+	- output
+		`tape output` returns the value at the current pointer location of the tape and places it into the requested register. operands: [register]
+	- seek
+		`tape seek` moves the tape to the requested location. operands: [register/value]
+	- step
+		`tape step` steps the tape one location forward. no operands.
