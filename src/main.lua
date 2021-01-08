@@ -1,19 +1,22 @@
 require "global"
 require "paladin"
 require "program_memory"
--- Functions
 
+-- Verify argument is passed in
+if arg[1] == nil then
+    print('You must pass a file to the program as the first argument.')
+else
+    -- **Main Program**
+    -- Create the Emulator object
+    print "Creating CPU emulator."
+    local cpu = paladin()
 
--- **Main Program**
--- Create the Emulator object
-print "Creating CPU emulator."
-local cpu = paladin()
+    -- Load the program
+    local prog = program()
+    prog:load(arg[1])
 
--- Load the program
-local prog = program()
-prog:load("../demos/test_modules.dat")
+    -- Pass the program to the emulator and go
+    cpu:bootstrap(prog)
 
--- Pass the program to the emulator and go
-cpu:bootstrap(prog)
-
-cpu:go()
+    cpu:go()
+end
